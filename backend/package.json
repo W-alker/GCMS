@@ -1,0 +1,21 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "简易后台",
+  "main": "http.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.17.1"
+  },
+  "dependencies": {
+    "express-formidable": "^1.2.0",
+    "express-jwt": "^6.0.0",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.6.1",
+    "nodemon": "^2.0.7"
+  }
+}
