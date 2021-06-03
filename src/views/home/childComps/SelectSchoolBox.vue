@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-for="item in schoolName" :key="item.name">
+  <div class="box" v-loading="!schoolName" element-loading-background="rgba(0,0,0,0.6)">
+    <table v-for="item in schoolName" :key="item.name" >
       <thead v-show="!sText">
         {{
           item.name
@@ -33,7 +33,6 @@ export default {
         return ''
       }
     }
-    
   },
   data() {
     return {

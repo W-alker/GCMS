@@ -1,4 +1,4 @@
-import {request} from './request'
+import { request } from './request'
 
 export function login(data) {
     return request({
@@ -8,6 +8,18 @@ export function login(data) {
         headers: {
             'Content-Type': 'multipart/form-data'
         },
-        withCredentials:true
+        withCredentials: true
+    })
+}
+
+export function logout(data) {
+    return request({
+        url: '/logout',
+        method: 'post',
+        data: data,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        withCredentials: true
     })
 }

@@ -6,11 +6,15 @@ export function request(options) {
         // 1.创建axios的实例对象
         const instance = axios.create({
             baseURL: 'http://127.0.0.1:8100',
-            timeout: 5000
+            timeout: 3000,
         })
 
         // 过滤器(拦截器)
         instance.interceptors.response.use(res => {
+            if (res.status === 401)
+                return reject('错误状态码!')
+            if(res.status === 500)
+                return reject('服务器错误!')
             return res.data
         })
 

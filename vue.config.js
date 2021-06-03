@@ -23,7 +23,25 @@ module.exports = {
             ]
         }
     },
+/*     devServer: {
+        proxy: {
+            '/api': {
+                // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/
+                target: 'http://127.0.0.1:8100',
+                // 允许跨域
+                changeOrigin: true,
+                ws: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    } */
 }
+
+
+
+
 /* module.exports = {
     outputDir: 'dist',  //build输出目录
     lintOnSave: false, //是否开启eslint

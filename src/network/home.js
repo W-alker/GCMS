@@ -3,7 +3,7 @@ import { request } from './request'
 export function getSchoolName() {
     return request({
         url: '/getSchoolName',
-        method: 'put',
+        method: 'get',
     })
 }
 

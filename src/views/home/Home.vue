@@ -5,9 +5,9 @@
         <el-form-item class="item-school" slot="item-school">
           <label for=""> <i class="fa fa-graduation-cap"></i>学校： </label>
           <el-input v-model="SName" name="SName"></el-input>
-          <el-button @click="openSchoolList"
-            ><i class="fa fa-chevron-right"></i
-          ></el-button>
+          <el-button @click="openSchoolList">
+            <i class="fa fa-chevron-right"></i>
+          </el-button>
         </el-form-item>
         <el-form-item class="item-idCode" slot="item-idCode">
           <label for=""> <i class="fa fa-user-circle-o"></i>学号/工号： </label>
@@ -34,6 +34,16 @@
           <el-button type="primary" round @click="submit"> 登录 </el-button>
         </el-form-item>
         <div slot="other" class="otherSet">
+          <a href="javascript:;" type="text" @click="autoLogin = !autoLogin"
+            >自动登录
+            <i
+              :class="[
+                'fa',
+                { 'fa-circle-o': !autoLogin, 'fa-check-circle-o': autoLogin },
+              ]"
+              style="margin-left: 2px"
+            ></i
+          ></a>
           <a href="javascript:;" @click="openResetPwdBox">忘记密码？</a>
         </div>
       </login-box>
@@ -44,7 +54,7 @@
         top="4vh"
         :width="dialogWidth"
       >
-      <reset-pwd-box :SName="SName" :idCode="idCode" /> 
+        <reset-pwd-box :SName="SName" :idCode="idCode" />
       </el-dialog>
 
       <el-dialog
@@ -61,9 +71,9 @@
         ></el-input>
         <select-school-box
           class="selectSchool-list"
-          :schoolName="schoolNameData"
           @item_selected="updateSName"
           ref="searchBox"
+          :schoolName="schoolNameData"
           :sText="search_text"
         ></select-school-box>
       </el-dialog>
@@ -76,8 +86,8 @@ import LoginBox from "./childComps/LoginBox";
 import SelectSchoolBox from "./childComps/SelectSchoolBox";
 import ResetPwdBox from "./childComps/ResetPwdBox";
 
-import { login } from "../../network/login";
-import { getSchoolName } from "../../network/home";
+import { login } from "network/login";
+import { getSchoolName } from "network/home";
 
 export default {
   name: "Home",
@@ -93,6 +103,7 @@ export default {
       idCode: "1801010388",
       pwd: "",
       schoolNameData: [],
+      autoLogin: false,
       dialogTableVisible: false,
       dialogFormVisible: false,
       dialogWidth: "500px",
@@ -101,10 +112,10 @@ export default {
   },
   methods: {
     openSchoolList() {
-      getSchoolName().then(data => {
+      this.dialogTableVisible = true;
+      getSchoolName().then((data) => {
         this.schoolNameData = data;
-        this.dialogTableVisible = true;
-      });
+      })
     },
     updateSName(sname) {
       this.SName = sname;
@@ -123,15 +134,17 @@ export default {
         : formdata.append("identiy", "admin");
       login(formdata).then((res) => {
         //保存信息
-        localStorage.setItem("login-info", {
-          SName: this.SName,
-          idCode: this.idCode,
-        });
+        localStorage.setItem("SName", this.SName);
+        localStorage.setItem("idCode", this.idCode);
+        if (this.autoLogin) localStorage.setItem("autoLogin", true);
         res.err === 0 ? this.$router.push("/user") : alert(res.msg);
       });
     },
   },
-  created() {},
+  created() {
+    //尝试自动登录
+    if (localStorage.getItem("autoLogin")) this.$router.push("/user");
+  },
 };
 </script>
 
@@ -147,13 +160,11 @@ export default {
   margin: calc((100vh - 586px) / 2) auto;
   overflow: hidden;
   .otherSet {
-    display: flex;
     a {
       display: inline-block;
-      flex: 1;
       text-decoration: none;
       &:last-child {
-        text-align: end;
+        float: right;
       }
     }
   }
