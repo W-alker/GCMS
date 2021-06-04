@@ -2,7 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 const Home = () => import("views/home/Home");
-const User = () => import("views/user/UserHome");
+const User = () => import("views/user/User");
+const UserHome = () => import('views/user/UserHome');
+const UserChangePwd = () => import('views/user/UserChangePwd');
 
 Vue.use(VueRouter);
 
@@ -19,9 +21,26 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User,    
+    redirect: '/user/home',
     meta: {
       title: '用户 | 垃圾分类管理系统'
-    }
+    },
+    children:[
+      {
+        path: '/user/home',
+        component: UserHome,
+        meta: {
+          title: '用户 | 垃圾分类管理系统'
+        },
+      },
+      {
+        path: '/user/changePwd',
+        component: UserChangePwd,
+        meta: {
+          title: '修改密码 | 垃圾分类管理系统'
+        },
+      }
+    ]
   },
 
 ];

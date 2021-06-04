@@ -11,8 +11,8 @@
       @current-change="currentChange"
     >
       <span class="custom-tree-node" slot-scope="{ node, data }">
-        <span :class="{'nav-current':currentId === data.id}">
-          <i :class="data.icon" style="margin-right:8px;"></i>{{ data.label }}
+        <span :class="{ 'nav-current': currentId === data.id }">
+          <i :class="data.icon" style="margin-right: 8px"></i>{{ data.label }}
         </span>
       </span>
     </el-tree>
@@ -36,18 +36,19 @@ export default {
     },
   },
   data() {
-      return {
-          currentId: 1
-      }
+    return {
+      currentId: 1,
+    };
   },
-  methods:{
-      nodeClick(node) {
-          console.log(node.id)
-      },
-      currentChange(node) {
-          this.currentId=node.id;
-      }
-  }
+  methods: {
+    nodeClick(node) {
+      // console.log(this.$route.path)
+      if (node.router && node.router !== this.$route.path) this.$router.push(node.router);
+    },
+    currentChange(node) {
+      this.currentId = node.id;
+    },
+  },
 };
 </script>
 
@@ -74,5 +75,4 @@ export default {
     border-radius: 50%;
   }
 }
-
 </style>
