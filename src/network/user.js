@@ -15,3 +15,21 @@ export function initInfo() {
         withCredentials: true
     })
 }
+
+export function changePwd(data) {
+    return request({
+        url: '/user/changePwd',
+        method: 'post',
+        data: data,
+        withCredentials: true
+    })
+}
+
+export function changeInfo(data) {
+    return request({
+        url: '/user/changeInfo',
+        method: 'post',
+        data: data,
+        withCredentials: true
+    })
+}

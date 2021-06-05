@@ -72,6 +72,7 @@ export default {
   margin-top: 30px;
   img {
     width: 120px;
+    height: 120px;
     border-radius: 50%;
   }
 }

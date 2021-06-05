@@ -1,5 +1,5 @@
 <template>
-  <el-row class="main">
+  <el-row class="personalMain">
     <el-card shadow="always" :body-style="card_style">
       <div slot="header" class="card-header">
         <h2>修改密码</h2>
@@ -17,13 +17,16 @@
         <el-form-item label="确认新密码:">
           <el-input v-model="confirmPwd" type="password" required></el-input>
         </el-form-item>
-          <el-button type="primary" style="width:100%;">确认修改</el-button>
+        <el-button type="primary" style="width: 100%" @click="submit"
+          >确认修改</el-button
+        >
       </el-form>
     </el-card>
   </el-row>
 </template>
 
 <script>
+import { changePwd } from "network/user";
 export default {
   name: "UserChangePwd",
   data() {
@@ -33,18 +36,33 @@ export default {
       confirmPwd: "",
       card_style: {
         padding: "0 20px 12px 20px",
-        boder: "2px black solid",
       },
     };
+  },
+  methods: {
+    submit() {
+      const formdata = new FormData();
+      formdata.append("oldPwd", this.oldPwd);
+      formdata.append("newPwd", this.newPwd);
+      formdata.append("confirmPwd", this.confirmPwd);
+      formdata.append("idCode", localStorage.getItem("idCode"));
+      changePwd(formdata)
+        .then((res) => {
+          if (res.err) this.$message.error(res.msg);
+          else this.$$message(res.msg)
+        })
+        .catch(() => this.$message.error("未知错误"));
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.main {
-    width: 100%;
-    height: 100%;
-}
+//此处样式部分被修改个人信息页面覆盖
+/* .personalMain {
+  width: 100%;
+  height: 100%;
+} */
 .el-card {
   margin: 0 auto;
   position: relative;
@@ -64,12 +82,12 @@ export default {
     color: var(--gray);
   }
 }
-.el-form{
-    .el-form-item{
-        margin-bottom: 12px;
-    }
-    .el-button{
-        margin-top: 10px;
-    }
+.el-form {
+  .el-form-item {
+    margin-bottom: 12px;
+  }
+  .el-button {
+    margin-top: 10px;
+  }
 }
 </style>

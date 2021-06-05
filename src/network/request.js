@@ -16,6 +16,13 @@ export function request(options) {
             if(res.status === 500)
                 return reject('服务器错误!')
             return res.data
+        }, err => {
+            //超时
+            if (err.code === 'ECONNABORTED' && err.message.indexOf('timeout') !== -1) {
+                // eslint-disable-next-line
+                return reject('请求超时！')
+            }
+            return reject(err)
         })
 
         // 通过实例发送网络请求

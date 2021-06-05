@@ -113,9 +113,11 @@ export default {
   methods: {
     openSchoolList() {
       this.dialogTableVisible = true;
-      getSchoolName().then((data) => {
-        this.schoolNameData = data;
-      })
+      getSchoolName()
+        .then((data) => {
+          this.schoolNameData = data;
+        })
+        .catch((err) => this.$message.error(err));
     },
     updateSName(sname) {
       this.SName = sname;
@@ -132,13 +134,20 @@ export default {
       this.radio === "1"
         ? formdata.append("identiy", "user")
         : formdata.append("identiy", "admin");
-      login(formdata).then((res) => {
-        //保存信息
-        localStorage.setItem("SName", this.SName);
-        localStorage.setItem("idCode", this.idCode);
-        if (this.autoLogin) localStorage.setItem("autoLogin", true);
-        res.err === 0 ? this.$router.push("/user") : alert(res.msg);
-      });
+      login(formdata)
+        .then((res) => {
+          //保存信息
+          localStorage.setItem("SName", this.SName);
+          localStorage.setItem("idCode", this.idCode);
+          this.$store.commit({
+            type: "update_userInfo",
+            SName: this.SName,
+            idCode: this.idCode,
+          });
+          if (this.autoLogin) localStorage.setItem("autoLogin", true);
+          res.err === 0 ? this.$router.push("/user") : alert(res.msg);
+        })
+        .catch((err) => this.$message.error(err));
     },
   },
   created() {

@@ -14,7 +14,9 @@
     </el-aside>
 
     <el-main>
-       <router-view></router-view>  
+      <keep-alive include="UserChangeInfo">
+        <router-view></router-view>
+      </keep-alive>
     </el-main>
   </el-container>
 </template>
@@ -39,7 +41,7 @@ export default {
       navbar_menu: [
         {
           id: 1,
-          router: '/user/home',
+          router: "/user/home",
           label: `首页`,
           icon: "fa fa-home",
           children: [],
@@ -51,13 +53,13 @@ export default {
           children: [
             {
               id: 3,
-              router: '/user/changePwd',
+              router: "/user/changePwd",
               label: "修改密码",
               icon: "fa fa-key",
             },
             {
               id: 4,
-              router: '/user/changeInfo',
+              router: "/user/changeInfo",
               label: "修改个人信息",
               icon: "fa fa-vcard",
             },
@@ -70,19 +72,19 @@ export default {
           children: [
             {
               id: 6,
-              router: '/user/',
+              router: "/user/",
               label: "垃圾分类情况",
               icon: "fa fa-table",
             },
             {
               id: 7,
-              router: '/user/',
+              router: "/user/",
               label: "分类知识查询",
               icon: "fa fa-search",
             },
             {
               id: 8,
-              router: '/user/',
+              router: "/user/",
               label: "垃圾回收点查询",
               icon: "fa fa-map-marker",
             },
@@ -90,7 +92,7 @@ export default {
         },
         {
           id: 9,
-          router: '/user/mailbox',
+          router: "/user/mailbox",
           label: "个人信箱",
           icon: "fa fa-envelope",
           children: [],
@@ -104,11 +106,13 @@ export default {
         console.log(res.msg);
         initInfo().then((data) => {
           this.userInfo = data;
+          //保存公共信息
+          this.$store.commit("update_userInfo", data);
         });
       })
       .catch((err) => {
         console.log(err);
-        alert("登录已过期，请重新登录");
+        this.$message("登录已过期，请重新登录");
         localStorage.removeItem("autoLogin");
         this.$router.push("/");
       });

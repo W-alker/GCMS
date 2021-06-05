@@ -5,6 +5,9 @@ const Token = require('../logining/token');    //token方法
 const router = express.Router();   //二级路由
 
 const initInfo = require('./initInfo')
+const changePwd = require('./changePwd')
+const uploadAvatar = require('./uploadAvatar');
+const changeInfo  = require('./changeInfo');
 
 //express-jwt挂载，验证token
 router.use(
@@ -17,7 +20,7 @@ router.use(
             return null;
         },
     }).unless({
-        path: ['/post'], //白名单，不作解析
+        path: ['/user/uploadAvatar'], //白名单，不作解析
     })
 );
 router.use(function (err, req, res, next) {
@@ -35,6 +38,10 @@ router.post("/", (req, res) => {
 });
 //加载个人信息
 router.get("/initInfo", initInfo);
+
+router.post('/changePwd', changePwd);
+router.post('/uploadAvatar', uploadAvatar);
+router.post('/changeInfo', changeInfo);
 
 
 module.exports = router;
