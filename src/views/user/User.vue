@@ -14,7 +14,7 @@
     </el-aside>
 
     <el-main>
-      <keep-alive include="UserChangeInfo">
+      <keep-alive include="UserChangeInfo,UserKnowledge,UserRecyclingPoint">
         <router-view></router-view>
       </keep-alive>
     </el-main>
@@ -72,19 +72,19 @@ export default {
           children: [
             {
               id: 6,
-              router: "/user/",
+              router: "/user/record",
               label: "垃圾分类情况",
               icon: "fa fa-table",
             },
             {
               id: 7,
-              router: "/user/",
+              router: "/user/knowledge",
               label: "分类知识查询",
               icon: "fa fa-search",
             },
             {
               id: 8,
-              router: "/user/",
+              router: "/user/recyclingPoint",
               label: "垃圾回收点查询",
               icon: "fa fa-map-marker",
             },
@@ -137,6 +137,8 @@ export default {
   top: var(--head-height);
   width: calc(100% - 200px);
   height: calc(100% - var(--head-height));
+  padding:0 ;
   background-color: var(--gray);
+  overflow: hidden;
 }
 </style>

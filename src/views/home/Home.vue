@@ -145,7 +145,7 @@ export default {
             idCode: this.idCode,
           });
           if (this.autoLogin) localStorage.setItem("autoLogin", true);
-          res.err === 0 ? this.$router.push("/user") : alert(res.msg);
+          res.err === 0 ? this.$router.push("/user") : this.$message.error(res.msg);
         })
         .catch((err) => this.$message.error(err));
     },

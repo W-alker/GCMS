@@ -6,6 +6,10 @@ const User = () => import("views/user/User");
 const UserHome = () => import('views/user/UserHome');
 const UserChangePwd = () => import('views/user/UserChangePwd');
 const UserChangeInfo = () => import('views/user/UserChangeInfo');
+const UserRecord = () => import('views/user/UserRecord')
+const UserKnowledge= () => import('views/user/UserKnowledge')
+const UserRecyclingPoint= () => import('views/user/UserRecyclingPoint')
+const UserMailBox = () => import('views/user/UserMailBox')
 
 Vue.use(VueRouter);
 
@@ -47,7 +51,36 @@ const routes = [
         meta: {
           title: '修改信息 | 垃圾分类管理系统'
         },
-      }
+      },
+      {
+        path: '/user/record',
+        component: UserRecord,
+        meta: {
+          title: '分类记录 | 垃圾分类管理系统'
+        }
+      },
+      {
+        path: '/user/knowledge',
+        component: UserKnowledge,
+        meta: {
+          title: '分类知识 | 垃圾分类管理系统'
+        }
+      },
+      {
+        path: '/user/recyclingPoint',
+        component: UserRecyclingPoint,
+        meta: {
+          title: '回收点 | 垃圾分类管理系统'
+        }
+      },
+      {
+        path: '/user/mailBox',
+        component: UserMailBox,
+        meta: {
+          title: '信箱| 垃圾分类管理系统'
+        }
+      },
+
     ]
   },
 

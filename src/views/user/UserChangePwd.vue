@@ -1,5 +1,5 @@
 <template>
-  <el-row class="personalMain">
+  <el-row class="personalMain-pwd">
     <el-card shadow="always" :body-style="card_style">
       <div slot="header" class="card-header">
         <h2>修改密码</h2>
@@ -49,7 +49,7 @@ export default {
       changePwd(formdata)
         .then((res) => {
           if (res.err) this.$message.error(res.msg);
-          else this.$$message(res.msg)
+          else this.$$message(res.msg);
         })
         .catch(() => this.$message.error("未知错误"));
     },
@@ -59,10 +59,10 @@ export default {
 
 <style lang="scss" scoped>
 //此处样式部分被修改个人信息页面覆盖
-/* .personalMain {
+.personalMain-pwd {
   width: 100%;
   height: 100%;
-} */
+}
 .el-card {
   margin: 0 auto;
   position: relative;
@@ -75,6 +75,7 @@ export default {
   h2 {
     margin-bottom: 16px;
     color: var(--primary);
+    text-align: center;
   }
   p {
     padding: 0 0 16px 0;

@@ -13,6 +13,15 @@ module.exports = {
             .set("network", resolve("src/network"))
         // .set("base", resolve("baseConfig"))
         // .set("public", resolve("public"));
+        config.externals = {
+            BMap: 'BMap',
+            BMapGL: "BMapGL"
+        }
+    },
+    configureWebpack: {
+        externals: {
+            BMapGL: "BMapGL"
+        }
     },
     //处理sass
     pluginOptions: {
@@ -23,20 +32,20 @@ module.exports = {
             ]
         }
     },
-/*     devServer: {
-        proxy: {
-            '/api': {
-                // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/
-                target: 'http://127.0.0.1:8100',
-                // 允许跨域
-                changeOrigin: true,
-                ws: true,
-                pathRewrite: {
-                    '^/api': ''
+    /*     devServer: {
+            proxy: {
+                '/api': {
+                    // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/
+                    target: 'http://127.0.0.1:8100',
+                    // 允许跨域
+                    changeOrigin: true,
+                    ws: true,
+                    pathRewrite: {
+                        '^/api': ''
+                    }
                 }
             }
-        }
-    } */
+        } */
 }
 
 

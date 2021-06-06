@@ -1,5 +1,5 @@
 <template>
-  <el-row class="personalMain">
+  <el-row class="personalMain-info">
     <el-card shadow="always">
       <div slot="header" class="card-header" :body-style="card_style">
         <h2 class="header-text">修改个人信息</h2>
@@ -96,11 +96,11 @@ export default {
 };
 </script>
 <style lang="scss" >
-.personalMain {
+.personalMain-info {
   width: 100%;
   height: 100%;
 }
-.personalMain .el-card {
+.personalMain-info .el-card {
   margin: 0 auto;
   position: relative;
   top: 50%;
